@@ -12,4 +12,4 @@ void init_character(character *character);
 
 void character_receive_damage(character *character, damage_t damage);
 
-bool character_is_dead(character *character);
+bool character_is_dead(const character *character);
