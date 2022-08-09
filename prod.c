@@ -55,6 +55,9 @@ void character_attack(const character *attacker, character *attackee) {
     if (attackee == attacker) {
         return;
     }
+    if (attacker->distance_to(attacker, attackee) > 0){
+        return;
+    }
     int difference_in_levels = attacker->level - attackee->level;
     if (difference_in_levels != 0 && difference_in_levels >= 5) {
         character_receive_damage(attackee, 150 / 2);
