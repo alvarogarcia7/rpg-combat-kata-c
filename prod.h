@@ -1,3 +1,6 @@
+#ifndef RPG_COMBAT_KATA_PROD_H
+#define RPG_COMBAT_KATA_PROD_H
+
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -18,3 +21,5 @@ void character_receive_healing(character *character, heal_t heal);
 bool character_is_dead(const character *character);
 
 bool character_is_alive(const character *character);
+
+#endif
