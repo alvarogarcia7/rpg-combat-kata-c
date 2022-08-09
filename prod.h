@@ -1,0 +1,2 @@
+
+char* fizzBuzz(int number);
