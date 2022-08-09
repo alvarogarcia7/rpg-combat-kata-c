@@ -125,7 +125,7 @@ static void test_character_attack_another_character_5_or_more_levels_below_corne
     character_attack(&attacker, &attackee);
 
     assert_int_equal(attacker.health, 1000);
-    assert_int_equal(attackee.health, 850 - (75));
+    assert_int_equal(attackee.health, 1000 - 850 - (75));
 }
 
 /* A test case that does nothing and succeeds. */
