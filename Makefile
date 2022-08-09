@@ -1,3 +1,10 @@
+install: install-githooks install-dependencies
+.PHONY: install
+
+install-githooks:
+	cp githooks/* .git/hooks
+.PHONY: install-githooks
+
 .PHONY: test
 test: build
 	@echo "Make test"
