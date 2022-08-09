@@ -99,10 +99,10 @@ static void test_character_attack_another_character_5_or_more_levels_above() {
     character attackee; character_init(&attackee);
     character_level_up(&attackee, 5);
 
-    character_attack(&attacker, &attacker);
+    character_attack(&attacker, &attackee);
 
-    assert_int_equal(attackee.health, 1000);
-    assert_int_equal(attacker.health, 1000 - (225));
+    assert_int_equal(attacker.health, 1000);
+    assert_int_equal(attackee.health, 1000 - (225));
 }
 
 /* A test case that does nothing and succeeds. */
