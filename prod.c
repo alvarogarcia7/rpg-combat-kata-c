@@ -5,6 +5,7 @@
 
 #define MAX_HEALTH 1000
 #define INITIAL_LEVEL 1
+#define MIN_HEALTH 0
 
 void character_init(character *character) {
     character->health = MAX_HEALTH;
@@ -14,13 +15,13 @@ void character_init(character *character) {
 void character_receive_damage(character *character, damage_t damage){
     uint16_t new_health = character->health - damage;
     if (damage > character->health){
-        new_health = 0;
+        new_health = MIN_HEALTH;
     }
     character->health = new_health;
 }
 
 bool character_is_dead(const character *character){
-    return character->health == 0;
+    return character->health == MIN_HEALTH;
 }
 
 bool character_is_alive(const character *character){
