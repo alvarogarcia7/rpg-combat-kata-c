@@ -77,6 +77,15 @@ static void test_character_health_cannot_go_higher_than_1000() {
     assert_int_equal(character.health, 1000);
 }
 
+static void test_character_can_damage_others() {
+    character attacker; character_init(&attacker);
+    character attackee; character_init(&attackee);
+
+    character_attack(&attacker, &attackee);
+
+    assert_int_not_equal(attackee.health, 1000);
+}
+
 /* A test case that does nothing and succeeds. */
 static void canary_test(void **state) {
     (void) state; /* unused */
@@ -85,14 +94,21 @@ static void canary_test(void **state) {
 int main(void) {
     const struct CMUnitTest tests[] = {
             cmocka_unit_test(canary_test)
+//            Initializer
             , cmocka_unit_test(test_characters_have_health_starting_at_1000)
             , cmocka_unit_test(test_characters_have_level_starting_at_1)
+//            Query about character
             , cmocka_unit_test(test_characters_can_be_dead)
             , cmocka_unit_test(test_characters_can_be_alive)
-            , cmocka_unit_test(test_character_health_cannot_go_lower_than_0)
+//            Healing
             , cmocka_unit_test(test_alive_characters_can_be_healed)
             , cmocka_unit_test(test_dead_characters_can_be_healed)
+//            Health
             , cmocka_unit_test(test_character_health_cannot_go_higher_than_1000)
+            , cmocka_unit_test(test_character_health_cannot_go_lower_than_0)
+
+//            Damage
+            , cmocka_unit_test(test_character_can_damage_others)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
