@@ -23,3 +23,7 @@ bool character_is_dead(const character *character){
 bool character_is_alive(const character *character){
     return !character_is_dead(character);
 }
+
+void character_receive_healing(character *character, heal_t heal) {
+    character->health += heal;
+}
