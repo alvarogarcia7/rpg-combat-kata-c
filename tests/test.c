@@ -5,6 +5,13 @@
 
 #include "../prod.h"
 
+static void test_characters_have_health_starting_at_1000() {
+    character character;
+    init_character(&character);
+
+    assert_int_equal(character.health, 1000);
+}
+
 /* A test case that does nothing and succeeds. */
 static void canary_test(void **state) {
     (void) state; /* unused */
@@ -13,6 +20,7 @@ static void canary_test(void **state) {
 int main(void) {
     const struct CMUnitTest tests[] = {
             cmocka_unit_test(canary_test)
+            , cmocka_unit_test(test_characters_have_health_starting_at_1000)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
