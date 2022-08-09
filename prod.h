@@ -17,6 +17,7 @@ typedef struct character {
     uint16_t health;
     uint8_t level;
     enum ATTACK_RANGE fighter_type;
+    uint64_t (*distance_to)(const struct character* attacker, const struct character* target);
 } character;
 
 void character_init(character *character, enum ATTACK_RANGE);

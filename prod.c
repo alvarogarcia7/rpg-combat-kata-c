@@ -7,10 +7,15 @@
 #define INITIAL_LEVEL 1
 #define MIN_HEALTH 0
 
+uint64_t zero_distance(const character* _, const character* _1){
+    return 0;
+}
+
 void character_init(character *character, enum ATTACK_RANGE range) {
     character->health = MAX_HEALTH;
     character->level = INITIAL_LEVEL;
     character->fighter_type = range;
+    character->distance_to = &zero_distance;
 }
 
 void character_receive_damage(character *character, damage_t damage){

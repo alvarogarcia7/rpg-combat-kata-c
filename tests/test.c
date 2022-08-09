@@ -128,6 +128,23 @@ static void test_character_attack_another_character_5_or_more_levels_below_corne
     assert_int_equal(attackee.health, 1000 - 850 - (75));
 }
 
+uint64_t out_of_range(const character* _, const character* _1){
+    return UINT64_MAX;
+}
+
+
+static void test_character_needs_to_be_in_range_to_perform_an_attack() {
+    character attacker; character_init(&attacker, MELEE);
+    attacker.distance_to = &out_of_range;
+    character target; character_init(&target, MELEE);
+
+    character_attack(&attacker, &target);
+
+    assert_int_equal(attacker.health, 1000);
+    assert_int_equal(target.health, 1000);
+}
+
+
 /* A test case that does nothing and succeeds. */
 static void canary_test(void **state) {
     (void) state; /* unused */
@@ -155,6 +172,8 @@ int main(void) {
             , cmocka_unit_test(test_character_attack_another_character_5_or_more_levels_above)
             , cmocka_unit_test(test_character_attack_another_character_5_or_more_levels_below)
             , cmocka_unit_test(test_character_attack_another_character_5_or_more_levels_below_corner_case)
+//            Range
+            , cmocka_unit_test(test_character_needs_to_be_in_range_to_perform_an_attack)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
