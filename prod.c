@@ -42,5 +42,8 @@ void character_receive_healing(character *character, heal_t heal) {
 }
 
 void character_attack(const character *attacker, character *attackee) {
+    if (attackee == attacker) {
+        return;
+    }
     character_receive_damage(attackee, 150);
 }
