@@ -22,6 +22,6 @@ bool character_is_dead(const character *character);
 
 bool character_is_alive(const character *character);
 
-void character_attack(character *attacker, character *attackee);
+void character_attack(const character *attacker, character *attackee);
 
 #endif
