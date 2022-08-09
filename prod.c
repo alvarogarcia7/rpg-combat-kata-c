@@ -3,8 +3,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define MAX_HEALTH 1000
+
 void character_init(character *character) {
-    character->health = 1000;
+    character->health = MAX_HEALTH;
     character->level = 1;
 }
 
@@ -25,10 +27,10 @@ bool character_is_alive(const character *character){
 }
 
 void character_receive_healing(character *character, heal_t heal) {
-    uint16_t remaining_health_to_maximum = 1000 - character->health;
+    uint16_t remaining_health_to_maximum = MAX_HEALTH - character->health;
     uint16_t result = character->health + heal;
     if (heal > remaining_health_to_maximum){
-        result = 1000;
+        result = MAX_HEALTH;
     }
     character->health = result;
 }
