@@ -4,10 +4,11 @@
 #include <string.h>
 
 #define MAX_HEALTH 1000
+#define INITIAL_LEVEL 1
 
 void character_init(character *character) {
     character->health = MAX_HEALTH;
-    character->level = 1;
+    character->level = INITIAL_LEVEL;
 }
 
 void character_receive_damage(character *character, damage_t damage){
