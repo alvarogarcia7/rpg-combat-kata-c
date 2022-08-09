@@ -9,7 +9,11 @@ void init_character(character *character) {
 }
 
 void character_receive_damage(character *character, damage_t damage){
-    character->health -= damage;
+    uint16_t new_health = character->health - damage;
+    if (damage > character->health){
+        new_health = 0;
+    }
+    character->health = new_health;
 }
 
 bool character_is_dead(const character *character){
