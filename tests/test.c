@@ -128,11 +128,11 @@ static void test_character_attack_another_character_5_or_more_levels_below_corne
     assert_int_equal(attackee.health, 1000 - 850 - (75));
 }
 
-uint64_t out_of_range(const character* _, const character* _1){
+uint64_t out_of_range(const character *_, const character *_1) {
     return UINT64_MAX;
 }
 
-uint64_t melee_character_in_range(const character* _, const character* _1){
+uint64_t melee_character_in_range(const character *_, const character *_1) {
     return 2;
 }
 
