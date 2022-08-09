@@ -20,6 +20,10 @@ void character_receive_damage(character *character, damage_t damage){
     character->health = new_health;
 }
 
+void character_level_up(character *character, level_up_t level_up) {
+    character->level += level_up;
+}
+
 bool character_is_dead(const character *character){
     return character->health == MIN_HEALTH;
 }

@@ -83,7 +83,7 @@ static void test_character_can_damage_others() {
 
     character_attack(&attacker, &attackee);
 
-    assert_int_not_equal(attackee.health, 1000);
+    assert_int_equal(attackee.health, 850);
 }
 
 static void test_character_cannot_damage_itself() {
@@ -92,6 +92,17 @@ static void test_character_cannot_damage_itself() {
     character_attack(&attacker, &attacker);
 
     assert_int_equal(attacker.health, 1000);
+}
+
+static void test_character_attack_another_character_5_or_more_levels_above() {
+    character attacker; character_init(&attacker);
+    character attackee; character_init(&attackee);
+    character_level_up(&attackee, 5);
+
+    character_attack(&attacker, &attacker);
+
+    assert_int_equal(attackee.health, 1000);
+    assert_int_equal(attacker.health, 1000 - (225));
 }
 
 /* A test case that does nothing and succeeds. */
@@ -118,6 +129,7 @@ int main(void) {
 //            Damage
             , cmocka_unit_test(test_character_can_damage_others)
             , cmocka_unit_test(test_character_cannot_damage_itself)
+            , cmocka_unit_test(test_character_attack_another_character_5_or_more_levels_above)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
