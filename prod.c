@@ -25,5 +25,10 @@ bool character_is_alive(const character *character){
 }
 
 void character_receive_healing(character *character, heal_t heal) {
-    character->health += heal;
+    uint16_t remaining_health_to_maximum = 1000 - character->health;
+    uint16_t result = character->health + heal;
+    if (heal > remaining_health_to_maximum){
+        result = 1000;
+    }
+    character->health = result;
 }
