@@ -7,6 +7,8 @@
 #define INITIAL_LEVEL 1
 #define MIN_HEALTH 0
 
+const uint64_t max_ranges[2] = {2, 20};
+
 uint64_t zero_distance(const character* _, const character* _1){
     return 0;
 }
@@ -55,7 +57,7 @@ void character_attack(const character *attacker, character *attackee) {
     if (attackee == attacker) {
         return;
     }
-    if (attacker->distance_to(attacker, attackee) > 0){
+    if (attacker->distance_to(attacker, attackee) > max_ranges[attacker->fighter_type]){
         return;
     }
     int difference_in_levels = attacker->level - attackee->level;
