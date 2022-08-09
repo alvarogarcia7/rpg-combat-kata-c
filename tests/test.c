@@ -36,6 +36,18 @@ static void test_characters_can_be_alive() {
 }
 
 
+static void test_characters_can_be_healed() {
+    character character;
+    character_init(&character);
+    character_receive_damage(&character, 150);
+
+    character_receive_healing(&character, 150);
+
+    assert_int_equal(character.health, 1000);
+    assert_true(character_is_alive(&character));
+}
+
+
 static void test_character_health_cannot_go_lower_than_0() {
     character character;
     character_init(&character);
@@ -59,6 +71,7 @@ int main(void) {
             , cmocka_unit_test(test_characters_can_be_dead)
             , cmocka_unit_test(test_characters_can_be_alive)
             , cmocka_unit_test(test_character_health_cannot_go_lower_than_0)
+            , cmocka_unit_test(test_characters_can_be_healed)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }

@@ -2,6 +2,7 @@
 #include <stdbool.h>
 
 #define damage_t uint16_t
+#define heal_t uint16_t
 
 typedef struct character {
     uint16_t health;
@@ -11,6 +12,8 @@ typedef struct character {
 void character_init(character *character);
 
 void character_receive_damage(character *character, damage_t damage);
+
+void character_receive_healing(character *character, heal_t heal);
 
 bool character_is_dead(const character *character);
 
