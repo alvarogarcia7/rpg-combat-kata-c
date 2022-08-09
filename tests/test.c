@@ -7,21 +7,21 @@
 
 static void test_characters_have_health_starting_at_1000() {
     character character;
-    init_character(&character);
+    character_init(&character);
 
     assert_int_equal(character.health, 1000);
 }
 
 static void test_characters_have_level_starting_at_1() {
     character character;
-    init_character(&character);
+    character_init(&character);
 
     assert_int_equal(character.level, 1);
 }
 
 static void test_characters_can_be_dead() {
     character character;
-    init_character(&character);
+    character_init(&character);
 
     character_receive_damage(&character, 1000);
 
@@ -30,7 +30,7 @@ static void test_characters_can_be_dead() {
 
 static void test_character_health_cannot_go_lower_than_0() {
     character character;
-    init_character(&character);
+    character_init(&character);
 
     character_receive_damage(&character, 1001);
 

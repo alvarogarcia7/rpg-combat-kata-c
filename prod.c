@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void init_character(character *character) {
+void character_init(character *character) {
     character->health = 1000;
     character->level = 1;
 }
