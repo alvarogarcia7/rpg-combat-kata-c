@@ -40,3 +40,7 @@ void character_receive_healing(character *character, heal_t heal) {
     }
     character->health = result;
 }
+
+void character_attack(character *attacker, character *attackee) {
+    character_receive_damage(attackee, 150);
+}
