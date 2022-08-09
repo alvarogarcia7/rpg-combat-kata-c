@@ -86,6 +86,14 @@ static void test_character_can_damage_others() {
     assert_int_not_equal(attackee.health, 1000);
 }
 
+static void test_character_cannot_damage_itself() {
+    character attacker; character_init(&attacker);
+
+    character_attack(&attacker, &attacker);
+
+    assert_int_equal(attacker.health, 1000);
+}
+
 /* A test case that does nothing and succeeds. */
 static void canary_test(void **state) {
     (void) state; /* unused */
@@ -109,6 +117,7 @@ int main(void) {
 
 //            Damage
             , cmocka_unit_test(test_character_can_damage_others)
+            , cmocka_unit_test(test_character_cannot_damage_itself)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
