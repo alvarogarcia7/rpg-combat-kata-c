@@ -1,11 +1,13 @@
 .PHONY: test
-test: 
-	cmake -Bcmake-build-debug .
-	$(MAKE) -Ccmake-build-debug all
+test: build
 	@echo "Make test"
 	$(MAKE) -Ccmake-build-debug unit_tests
 	@echo "Execute tests (with more debug information)"
 	./cmake-build-debug/tests/unit_tests
+
+build:
+	cmake -Bcmake-build-debug .
+	$(MAKE) -Ccmake-build-debug all
 
 install-dependencies:
 	mkdir cmake-build-debug || true
@@ -21,3 +23,8 @@ prepare-mark-start:
 prepare-mark-end:
 	@echo "This is a manual goal. Paste what's on the copy-paste buffer"
 	@echo 'f cc "Time-Marker: end" --allow-empty' | pbcopy
+
+pre-commit: build test
+
+pre-push:
+	echo "pre-push: No Op"
