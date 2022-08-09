@@ -13,3 +13,5 @@ void character_init(character *character);
 void character_receive_damage(character *character, damage_t damage);
 
 bool character_is_dead(const character *character);
+
+bool character_is_alive(const character *character);

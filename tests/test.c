@@ -28,6 +28,14 @@ static void test_characters_can_be_dead() {
     assert_true(character_is_dead(&character));
 }
 
+static void test_characters_can_be_alive() {
+    character character;
+    character_init(&character);
+
+    assert_true(character_is_alive(&character));
+}
+
+
 static void test_character_health_cannot_go_lower_than_0() {
     character character;
     character_init(&character);
@@ -49,6 +57,7 @@ int main(void) {
             , cmocka_unit_test(test_characters_have_health_starting_at_1000)
             , cmocka_unit_test(test_characters_have_level_starting_at_1)
             , cmocka_unit_test(test_characters_can_be_dead)
+            , cmocka_unit_test(test_characters_can_be_alive)
             , cmocka_unit_test(test_character_health_cannot_go_lower_than_0)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
