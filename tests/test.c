@@ -140,6 +140,13 @@ uint64_t melee_character_out_of_range(const character *_, const character *_1) {
     return 2 + 1;
 }
 
+uint64_t ranged_character_in_range(const character *_, const character *_1) {
+    return 20;
+}
+
+uint64_t ranged_character_out_of_range(const character *_, const character *_1) {
+    return 20 + 1;
+}
 
 static void test_character_needs_to_be_in_range_to_perform_an_attack() {
     character attacker; character_init(&attacker, MELEE);
@@ -166,6 +173,28 @@ static void test_melee_character_needs_to_be_in_range_to_perform_an_attack() {
 static void test_melee_character_needs_to_be_in_range_to_perform_an_attack_out_of_range() {
     character attacker; character_init(&attacker, MELEE);
     attacker.distance_to = &melee_character_out_of_range;
+    character target; character_init(&target, MELEE);
+
+    character_attack(&attacker, &target);
+
+    assert_int_equal(attacker.health, 1000);
+    assert_int_equal(target.health, 1000);
+}
+
+static void test_ranged_character_needs_to_be_in_range_to_perform_an_attack() {
+    character attacker; character_init(&attacker, RANGED);
+    attacker.distance_to = &ranged_character_in_range;
+    character target; character_init(&target, MELEE);
+
+    character_attack(&attacker, &target);
+
+    assert_int_equal(attacker.health, 1000);
+    assert_int_equal(target.health, 850);
+}
+
+static void test_ranged_character_needs_to_be_in_range_to_perform_an_attack_out_of_range() {
+    character attacker; character_init(&attacker, RANGED);
+    attacker.distance_to = &ranged_character_out_of_range;
     character target; character_init(&target, MELEE);
 
     character_attack(&attacker, &target);
@@ -206,6 +235,8 @@ int main(void) {
             , cmocka_unit_test(test_character_needs_to_be_in_range_to_perform_an_attack)
             , cmocka_unit_test(test_melee_character_needs_to_be_in_range_to_perform_an_attack)
             , cmocka_unit_test(test_melee_character_needs_to_be_in_range_to_perform_an_attack_out_of_range)
+            , cmocka_unit_test(test_ranged_character_needs_to_be_in_range_to_perform_an_attack)
+            , cmocka_unit_test(test_ranged_character_needs_to_be_in_range_to_perform_an_attack_out_of_range)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
