@@ -4,6 +4,11 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+enum ATTACK_RANGE{
+    MELEE = 0,
+    RANGED = 1
+};
+
 #define damage_t uint16_t
 #define heal_t uint16_t
 #define level_up_t uint8_t
@@ -11,9 +16,10 @@
 typedef struct character {
     uint16_t health;
     uint8_t level;
+    enum ATTACK_RANGE fighter_type;
 } character;
 
-void character_init(character *character);
+void character_init(character *character, enum ATTACK_RANGE);
 
 void character_receive_damage(character *character, damage_t damage);
 

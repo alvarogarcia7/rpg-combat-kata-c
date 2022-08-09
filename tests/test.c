@@ -7,21 +7,21 @@
 
 static void test_characters_have_health_starting_at_1000() {
     character character;
-    character_init(&character);
+    character_init(&character, MELEE);
 
     assert_int_equal(character.health, 1000);
 }
 
 static void test_characters_have_level_starting_at_1() {
     character character;
-    character_init(&character);
+    character_init(&character, MELEE);
 
     assert_int_equal(character.level, 1);
 }
 
 static void test_characters_can_be_dead() {
     character character;
-    character_init(&character);
+    character_init(&character, MELEE);
 
     character_receive_damage(&character, 1000);
 
@@ -30,14 +30,14 @@ static void test_characters_can_be_dead() {
 
 static void test_characters_can_be_alive() {
     character character;
-    character_init(&character);
+    character_init(&character, MELEE);
 
     assert_true(character_is_alive(&character));
 }
 
 static void test_alive_characters_can_be_healed() {
     character character;
-    character_init(&character);
+    character_init(&character, MELEE);
     character_receive_damage(&character, 150);
 
     character_receive_healing(&character, 150);
@@ -48,7 +48,7 @@ static void test_alive_characters_can_be_healed() {
 
 static void test_dead_characters_can_be_healed() {
     character character;
-    character_init(&character);
+    character_init(&character, MELEE);
     character_receive_damage(&character, 1000);
     assert_true(character_is_dead(&character));
 
@@ -60,7 +60,7 @@ static void test_dead_characters_can_be_healed() {
 
 static void test_character_health_cannot_go_lower_than_0() {
     character character;
-    character_init(&character);
+    character_init(&character, MELEE);
 
     character_receive_damage(&character, 1001);
 
@@ -70,7 +70,7 @@ static void test_character_health_cannot_go_lower_than_0() {
 
 static void test_character_health_cannot_go_higher_than_1000() {
     character character;
-    character_init(&character);
+    character_init(&character, MELEE);
 
     character_receive_healing(&character, 150);
 
@@ -78,8 +78,8 @@ static void test_character_health_cannot_go_higher_than_1000() {
 }
 
 static void test_character_can_damage_others() {
-    character attacker; character_init(&attacker);
-    character attackee; character_init(&attackee);
+    character attacker; character_init(&attacker, MELEE);
+    character attackee; character_init(&attackee, MELEE);
 
     character_attack(&attacker, &attackee);
 
@@ -87,7 +87,7 @@ static void test_character_can_damage_others() {
 }
 
 static void test_character_cannot_damage_itself() {
-    character attacker; character_init(&attacker);
+    character attacker; character_init(&attacker, MELEE);
 
     character_attack(&attacker, &attacker);
 
@@ -95,8 +95,8 @@ static void test_character_cannot_damage_itself() {
 }
 
 static void test_character_attack_another_character_5_or_more_levels_above() {
-    character attacker; character_init(&attacker);
-    character attackee; character_init(&attackee);
+    character attacker; character_init(&attacker, MELEE);
+    character attackee; character_init(&attackee, MELEE);
     character_level_up(&attackee, 5);
 
     character_attack(&attacker, &attackee);
@@ -106,9 +106,9 @@ static void test_character_attack_another_character_5_or_more_levels_above() {
 }
 
 static void test_character_attack_another_character_5_or_more_levels_below() {
-    character attacker; character_init(&attacker);
+    character attacker; character_init(&attacker, MELEE);
     character_level_up(&attacker, 5);
-    character attackee; character_init(&attackee);
+    character attackee; character_init(&attackee, MELEE);
 
     character_attack(&attacker, &attackee);
 
@@ -117,9 +117,9 @@ static void test_character_attack_another_character_5_or_more_levels_below() {
 }
 
 static void test_character_attack_another_character_5_or_more_levels_below_corner_case() {
-    character attacker; character_init(&attacker);
+    character attacker; character_init(&attacker, MELEE);
     character_level_up(&attacker, 5);
-    character attackee; character_init(&attackee);
+    character attackee; character_init(&attackee, MELEE);
     character_receive_damage(&attackee, 850);
 
     character_attack(&attacker, &attackee);
