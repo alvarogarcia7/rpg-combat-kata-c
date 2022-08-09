@@ -105,6 +105,17 @@ static void test_character_attack_another_character_5_or_more_levels_above() {
     assert_int_equal(attackee.health, 1000 - (225));
 }
 
+static void test_character_attack_another_character_5_or_more_levels_below() {
+    character attacker; character_init(&attacker);
+    character_level_up(&attacker, 5);
+    character attackee; character_init(&attackee);
+
+    character_attack(&attacker, &attackee);
+
+    assert_int_equal(attacker.health, 1000);
+    assert_int_equal(attackee.health, 1000 - (75));
+}
+
 /* A test case that does nothing and succeeds. */
 static void canary_test(void **state) {
     (void) state; /* unused */
@@ -130,6 +141,7 @@ int main(void) {
             , cmocka_unit_test(test_character_can_damage_others)
             , cmocka_unit_test(test_character_cannot_damage_itself)
             , cmocka_unit_test(test_character_attack_another_character_5_or_more_levels_above)
+            , cmocka_unit_test(test_character_attack_another_character_5_or_more_levels_below)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
