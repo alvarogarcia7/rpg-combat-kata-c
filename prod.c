@@ -5,4 +5,5 @@
 
 void init_character(character *character) {
     character->health = 1000;
+    character->level = 1;
 }
