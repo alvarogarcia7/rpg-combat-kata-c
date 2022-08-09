@@ -58,6 +58,15 @@ static void test_character_health_cannot_go_lower_than_0() {
     assert_true(character_is_dead(&character));
 }
 
+static void test_character_health_cannot_go_higher_than_1000() {
+    character character;
+    character_init(&character);
+
+    character_receive_healing(&character, 150);
+
+    assert_int_equal(character.health, 1000);
+}
+
 /* A test case that does nothing and succeeds. */
 static void canary_test(void **state) {
     (void) state; /* unused */
@@ -72,6 +81,7 @@ int main(void) {
             , cmocka_unit_test(test_characters_can_be_alive)
             , cmocka_unit_test(test_character_health_cannot_go_lower_than_0)
             , cmocka_unit_test(test_characters_can_be_healed)
+            , cmocka_unit_test(test_character_health_cannot_go_higher_than_1000)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
